@@ -43,7 +43,7 @@ class register extends Component
             return;
         }
         a.Lawyer=this.state.isLawyer;
-        fetch('http://localhost:8080/user/register', {
+        fetch('http://localhost:8080/register', {
             method: "POST",
             headers: {
         'Content-Type': 'application/json',

@@ -5,7 +5,7 @@ class judgement extends Component{
         a.User_ID=parseInt(document.cookie.split("=")[1]);
         a.Precedent_ID=this.props.id.ID;
         console.log(a);
-        fetch('http://localhost:8080/analyze/myjudgement', {
+        fetch('http://localhost:8080/user/judgement', {
             method: "POST",
             headers: {
         'Content-Type': 'application/json',

@@ -22,27 +22,13 @@ class postdetail extends Component{
     }
     componentDidMount(){
       //  console.log(this.props.location.pathname.split("/")[2]);
-        fetch('http://localhost:8080/boards/'+this.props.location.pathname.split("/")[2])
+        fetch('http://localhost:8080/boards/posts/'+this.props.location.pathname.split("/")[2])
         .then(response => response.json())
         .then((data)=>
         {
             console.log(data);
 
             this.setState({post : data});
-            fetch('http://localhost:8080/boards/'+this.props.location.pathname.split("/")[2])
-            .then(response => response.json())
-            .then((data)=>
-            {    
-                this.setState({post : data});
-                fetch('http://localhost:8080/user/'+data.ID)
-                .then(response => response.json())
-                .then((data)=>
-                {    
-                    console.log(data);
-                    this.setState({user : data});
-        
-                });
-            });
             fetch('http://localhost:8080/reply/'+this.props.location.pathname.split("/")[2])
             .then(response => response.json())
             .then((data)=>

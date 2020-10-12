@@ -19,7 +19,7 @@ class Login extends Component{
         a.userID=this.state.email;
         a.userPW=this.state.password;
  //       console.log("hi");
- fetch('http://localhost:8080/user/login', {
+ fetch('http://localhost:8080/login', {
     method: "POST",
     headers: {
 'Content-Type': 'application/json',

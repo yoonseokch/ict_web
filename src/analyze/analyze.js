@@ -27,7 +27,7 @@ class Analyze extends Component{
         event.preventDefault();
         let data = new FormData();
         data.append('temp', document.getElementById("input").elements[0].files[0]);
-        fetch('http://localhost:8080/apicall', {
+        fetch('http://localhost:8080/apicall1', {
             method: 'POST',
             body: data,
             headers: {

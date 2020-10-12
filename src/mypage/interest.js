@@ -13,7 +13,7 @@ class Information extends Component {
         var a={};
         a.User_ID=parseInt(document.cookie.split("=")[1]);
         a.Category_ID=this.state.fieldName.indexOf(e.target.value);
-        fetch('http://localhost:8080/interests', {
+        fetch('http://localhost:8080/user/interests', {
             method: "DELETE",
             headers: {
         'Content-Type': 'application/json',
@@ -31,8 +31,10 @@ class Information extends Component {
         this.change();
     }
     keyup = (e) => {
+
         if (e.key==="Enter")
         {
+            console.log("i");
             if (this.state.fieldName.includes(document.getElementById("input").value))
             {
                 if (!this.state.fields.includes(document.getElementById("input").value))
@@ -41,7 +43,7 @@ class Information extends Component {
                     a.User_ID=parseInt(document.cookie.split("=")[1]);
                     a.Category_ID=this.state.fieldName.indexOf(document.getElementById("input").value);
                     console.log(a);
-                    fetch('http://localhost:8080/interests/register', {
+                    fetch('http://localhost:8080/user/interests', {
                         method: "POST",
                         headers: {
                     'Content-Type': 'application/json',
@@ -72,7 +74,7 @@ class Information extends Component {
     }
     componentDidMount()
     {
-        fetch('http://localhost:8080/interests/'+parseInt(document.cookie.split("=")[1]))
+        fetch('http://localhost:8080/user/interests/'+parseInt(document.cookie.split("=")[1]))
         .then(response => response.json())
         .then((data)=>
         {    

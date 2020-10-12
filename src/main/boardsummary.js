@@ -9,7 +9,7 @@ class MainAnalyze extends Component {
     
     componentDidMount()
     {
-        fetch('http://localhost:8080/main/boards/'+parseInt(this.props.type))
+        fetch(`http://localhost:8080/boards/${parseInt(this.props.type)}?limit=3`)
         .then(response => response.json())
         .then((data)=>
         {    
