@@ -12,10 +12,6 @@ class New extends Component{
         a.title=document.getElementById("title").value;
         a.content=document.getElementById("content").value;
         a.User_ID=parseInt(document.cookie.split("=")[1]);
-        a.views=0;
-        a.reports=0;
-        var today=new Date();
-        a.writtenDate=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         console.log(a);
     
         fetch('http://localhost:8080/boards/write', {

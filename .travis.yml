@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - 12
+
+services:
+  - docker
+
+install:
+  - npm i
+
+
+script:
+  - npm run build
+
+after_success:
+  - docker login -u "$DOCKER_USER" -p "$DOCKER_PW"
+  - if [ -n "${TRAVIS_TAG}" ]; then
+      docker build -t yoonseokch/ict-web:${TRAVIS_TAG} .;
+      docker push yoonseokch/ict-web:${TRAVIS_TAG};
+    else
+      docker build -t yoonseokch/ict-web:latest .;
+      docker push yoonseokch/ict-web:latest;
+    fi
