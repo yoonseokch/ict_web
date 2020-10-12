@@ -9,8 +9,6 @@ class WriteReply extends Component{
     submit = () => {
         var a={};
         a.content=document.getElementById("input1").value;
-        a.writtenDate="2020-01-10";    
-        a.reports=0;
         a.Post_ID=parseInt(this.props.location.pathname.split("/")[2]);
         a.User_ID=this.state.user.ID;
      //   console.log(a);
