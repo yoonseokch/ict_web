@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Smallbox from './smallbox.js';
+import {MyContext} from '../context.js';
 //import { Redirect,Route, BrowserRouter as Router, Switch } from "react-router-dom"
 class Information extends Component {
     state = {
@@ -10,7 +11,9 @@ class Information extends Component {
     };
     componentDidMount()
     {
-        fetch('http://localhost:8080/user/'+parseInt(document.cookie.split("=")[1]))
+        let b= this.context;
+
+        fetch(`${b.API_URL}/user/${parseInt(document.cookie.split("=")[1])}`)
         .then(response => response.json())
         .then((data)=>
         {    
@@ -52,5 +55,5 @@ class Information extends Component {
         );
     }
 }
-
+Information.contextType=MyContext;
 export default Information;

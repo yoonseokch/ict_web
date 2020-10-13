@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Intli from './intLi.js';
 import MyIntLi from './myIntLi.js';
+import {MyContext} from '../context.js';
 //import { Redirect,Route, BrowserRouter as Router, Switch } from "react-router-dom"
 class Information extends Component {
     state = {
@@ -9,11 +10,13 @@ class Information extends Component {
         myInterests : []
     };
     delete = (e) =>{
+        let b= this.context;
+
         console.log(e.target);
         var a={};
         a.User_ID=parseInt(document.cookie.split("=")[1]);
         a.Category_ID=this.state.fieldName.indexOf(e.target.value);
-        fetch('http://localhost:8080/user/interests', {
+        fetch(`${b.API_URL}/user/interests`, {
             method: "DELETE",
             headers: {
         'Content-Type': 'application/json',
@@ -43,7 +46,9 @@ class Information extends Component {
                     a.User_ID=parseInt(document.cookie.split("=")[1]);
                     a.Category_ID=this.state.fieldName.indexOf(document.getElementById("input").value);
                     console.log(a);
-                    fetch('http://localhost:8080/user/interests', {
+                    let b= this.context;
+
+                    fetch(`${b.API_URL}/user/interests`, {
                         method: "POST",
                         headers: {
                     'Content-Type': 'application/json',
@@ -74,7 +79,9 @@ class Information extends Component {
     }
     componentDidMount()
     {
-        fetch('http://localhost:8080/user/interests/'+parseInt(document.cookie.split("=")[1]))
+        let b= this.context;
+
+        fetch(`${b.API_URL}/user/interests/${parseInt(document.cookie.split("=")[1])}`)
         .then(response => response.json())
         .then((data)=>
         {    
@@ -115,5 +122,5 @@ class Information extends Component {
         );
     }
 }
-
+Information.contextType=MyContext;
 export default Information;

@@ -1,12 +1,15 @@
 //This component is a bar which is displayed at the top of hompage
 import React,{Component} from 'react';
+import {MyContext} from '../context.js';
 class Reply extends Component{
     state={
         user : []
     }
     componentDidMount()
     {
-        fetch('http://localhost:8080/user/'+this.props.reply.User_ID,{
+        let b= this.context;
+
+        fetch(`${b.API_URL}/user/${this.props.reply.User_ID}`,{
             method: "GET",
             headers: {
             'Content-Type': 'application/json',
@@ -31,5 +34,5 @@ class Reply extends Component{
         );
     }
 }
-
+Reply.contextType=MyContext;
 export default Reply;

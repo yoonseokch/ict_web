@@ -9,13 +9,15 @@ import boards from './boards/boards.js';
 import Mypage from './mypage/mypage.js';
 import Main from './main/main.js';
 import Qna from './qna/qna.js';
+import { MyContext, LOCAL_URL, PRODUCTION_URL } from './context.js';
 class App extends Component
 {
   constructor(props)
   {
     super(props);
     this.state=({
-      user:-1
+      user:-1,
+      API_URL : process.env.REACT_APP_LOCAL ? LOCAL_URL : PRODUCTION_URL
     });
   }
   increase = () =>  
@@ -29,7 +31,7 @@ class App extends Component
     if (a[1]!==undefined)
     {
       return(
-        <div>
+        <MyContext.Provider value={{API_URL : this.state.API_URL}}>
         <Bar/>
           <Router>
             <Switch>
@@ -41,7 +43,7 @@ class App extends Component
             <Redirect path="*" to="/" />
             </Switch>
           </Router>
-        </div>
+        </MyContext.Provider>
       );
     }
     else

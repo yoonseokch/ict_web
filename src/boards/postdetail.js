@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import '../styles/tailwind.css';
 import Writereply from './writereply.js';
 import Reply from './reply.js';
+import {MyContext} from '../context.js';
 class postdetail extends Component{
     state={
         post:[],
@@ -10,26 +11,31 @@ class postdetail extends Component{
         replies:[]
     }
     postdelete= () =>{
-        fetch('http://localhost:8080/boards/'+this.props.location.pathname.split("/")[2],{
+        let b= this.context;
+
+        fetch(`${b.API_URL}/boards/${this.props.location.pathname.split("/")[2]}`,{
             method: "DELETE"
         })
         .then(response => response.json())
         .then((data)=>
         {    
             console.log("글 삭제가 완료되었습니다!");
+            window.location.href="/boards";
         });
-        window.location.href="/boards";
+        
     }
     componentDidMount(){
       //  console.log(this.props.location.pathname.split("/")[2]);
-        fetch('http://localhost:8080/boards/posts/'+this.props.location.pathname.split("/")[2])
+        let b= this.context;
+
+        fetch(`${b.API_URL}/boards/posts/${this.props.location.pathname.split("/")[2]}`)
         .then(response => response.json())
         .then((data)=>
         {
             console.log(data);
 
             this.setState({post : data});
-            fetch('http://localhost:8080/reply/'+this.props.location.pathname.split("/")[2])
+            fetch(`${b.API_URL}/reply/${this.props.location.pathname.split("/")[2]}`)
             .then(response => response.json())
             .then((data)=>
             {    
@@ -67,5 +73,5 @@ class postdetail extends Component{
         );
     }
 }
-
+postdetail.contextType=MyContext;
 export default postdetail;

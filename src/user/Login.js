@@ -2,6 +2,7 @@
 import Lawbot from '../img/Lawbot.png';
 import React,{Component} from 'react';
 import '../styles/Login.css';
+import {MyContext} from '../context.js';
 class Login extends Component{
     state= {
         email: '',
@@ -13,34 +14,35 @@ class Login extends Component{
         });
       }
     submit = () =>{
+        let b= this.context;
+
         var a={
 
         };
         a.userID=this.state.email;
         a.userPW=this.state.password;
- //       console.log("hi");
- fetch('http://localhost:8080/login', {
-    method: "POST",
-    headers: {
-'Content-Type': 'application/json',
-},
-body: JSON.stringify(a),
-})
-.then(response => response.json())
-.then(data => {
-    //console.log(data);
-if (data.success===true)
-{
-    document.cookie="user="+data.id;
-alert("로그인 되었습니다.");
-window.location='/';
-//process.env.REACT_APP_USER="YES";
-}
-else
-{
-alert("아이디가 존재하지 않거나 패스워드가 일치하지 않습니다.");
-}
-})
+        fetch(`${b.API_URL}/login`, {
+        method: "POST",
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(a),
+        })
+        .then(response => response.json())
+        .then(data => {
+        //console.log(data);
+        if (data.success===true)
+        {
+        document.cookie="user="+data.id;
+        alert("로그인 되었습니다.");
+        window.location='/';
+        //process.env.REACT_APP_USER="YES";
+        }
+        else
+        {
+        alert("아이디가 존재하지 않거나 패스워드가 일치하지 않습니다.");
+        }
+        })
     }
     render()
     {
@@ -61,5 +63,5 @@ alert("아이디가 존재하지 않거나 패스워드가 일치하지 않습�
         );
     }
 }
-
+Login.contextType=MyContext;
 export default Login;

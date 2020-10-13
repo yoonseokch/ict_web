@@ -1,11 +1,13 @@
 import React,{Component} from 'react';
+import {MyContext} from '../context.js';
 class judgement extends Component{
     myjudgement = () =>{
+        let b= this.context;
         var a={};
         a.User_ID=parseInt(document.cookie.split("=")[1]);
         a.Precedent_ID=this.props.id.ID;
         console.log(a);
-        fetch('http://localhost:8080/user/judgement', {
+        fetch(`${b.API_URL}/user/judgement`, {
             method: "POST",
             headers: {
         'Content-Type': 'application/json',
@@ -51,5 +53,5 @@ class judgement extends Component{
         );
     }
 }
-
+judgement.contextType=MyContext;
 export default judgement;

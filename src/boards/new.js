@@ -1,9 +1,13 @@
 //This component is a bar which is displayed at the top of hompage
 import React,{Component} from 'react';
+import {MyContext} from '../context.js';
 
 class New extends Component{
+
     postsubmit = () =>
     {
+        
+        let b= this.context;
         var a={
 
         };
@@ -12,9 +16,7 @@ class New extends Component{
         a.title=document.getElementById("title").value;
         a.content=document.getElementById("content").value;
         a.User_ID=parseInt(document.cookie.split("=")[1]);
-        console.log(a);
-    
-        fetch('http://localhost:8080/boards/write', {
+        fetch(`${b.API_URL}/boards/write`, {
             method: "POST",
             headers: {
         'Content-Type': 'application/json',
@@ -29,7 +31,7 @@ class New extends Component{
         window.location.href="/boards?category=0";
     }
     render()
-    {
+    {        
         return(
             <div>
             <div id="categoryselect" className="inline-block relative w-64">
@@ -65,5 +67,5 @@ class New extends Component{
         );
     }
 }
-
+New.contextType=MyContext;
 export default New;

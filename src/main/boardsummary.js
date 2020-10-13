@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {MyContext} from '../context.js';
 class MainAnalyze extends Component {
     state = {
         link : "/boards?category="+this.props.type,
@@ -9,7 +9,9 @@ class MainAnalyze extends Component {
     
     componentDidMount()
     {
-        fetch(`http://localhost:8080/boards/${parseInt(this.props.type)}?limit=3`)
+        let b= this.context;
+
+        fetch(`${b.API_URL}/boards/${parseInt(this.props.type)}?limit=3`)
         .then(response => response.json())
         .then((data)=>
         {    
@@ -45,5 +47,5 @@ class MainAnalyze extends Component {
         );
     }
 }
-
+MainAnalyze.contextType=MyContext;
 export default MainAnalyze;

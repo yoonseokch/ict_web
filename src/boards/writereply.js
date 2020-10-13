@@ -2,17 +2,20 @@
 import React,{Component} from 'react';
 import Write from '../img/write.png';
 import '../styles/Bar.css';
+import {MyContext} from '../context.js';
 class WriteReply extends Component{
     state={
         user:[]
     }
     submit = () => {
+        let b= this.context;
+
         var a={};
         a.content=document.getElementById("input1").value;
         a.Post_ID=parseInt(this.props.location.pathname.split("/")[2]);
         a.User_ID=this.state.user.ID;
      //   console.log(a);
-        fetch('http://localhost:8080/reply/write',{
+        fetch(`${b.API_URL}/reply/write`,{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -26,7 +29,9 @@ class WriteReply extends Component{
         });
     }
     componentDidMount(){
-        fetch('http://localhost:8080/user/'+parseInt(document.cookie.split("=")[1]))
+        let b= this.context;
+
+        fetch(`${b.API_URL}/user/${parseInt(document.cookie.split("=")[1])}`)
         .then(response => response.json())
         .then((data)=>
         {    
@@ -48,5 +53,5 @@ class WriteReply extends Component{
         );
     }
 }
-
+WriteReply.contextType=MyContext;
 export default WriteReply;

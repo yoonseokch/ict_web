@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import '../styles/Login.css';
 import Lawbot from '../img/Lawbot.png';
+import {MyContext} from '../context.js';
 class register extends Component
 {
     state= {
@@ -42,8 +43,10 @@ class register extends Component
             alert("성별을 다시 입력해주세요!");
             return;
         }
+        let b= this.context;
+
         a.Lawyer=this.state.isLawyer;
-        fetch('http://localhost:8080/register', {
+        fetch(`${b.API_URL}/register`, {
             method: "POST",
             headers: {
         'Content-Type': 'application/json',
@@ -103,4 +106,5 @@ class register extends Component
         )
     }
 }
+register.contextType=MyContext;
 export default register;

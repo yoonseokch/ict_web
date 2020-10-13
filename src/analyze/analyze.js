@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import Afteranalyze from './afterAnalyze.js';
+import {MyContext} from '../context.js';
 class Analyze extends Component{
     state={
         useImage : true,
@@ -24,10 +25,12 @@ class Analyze extends Component{
     analyze = (event) =>
     {
         //fetch api 
+        let b= this.context;
+
         event.preventDefault();
         let data = new FormData();
         data.append('temp', document.getElementById("input").elements[0].files[0]);
-        fetch('http://localhost:8080/apicall1', {
+        fetch(`${b.API_URL}/apicall1`, {
             method: 'POST',
             body: data,
             headers: {
@@ -130,5 +133,5 @@ class Analyze extends Component{
         }
     }
 }
-
+Analyze.contextType=MyContext;
 export default Analyze;

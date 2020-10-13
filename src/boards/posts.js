@@ -1,12 +1,15 @@
 //This component is a bar which is displayed at the top of hompage
 import React,{Component} from 'react';
 import Posting from './post.js';
+import {MyContext} from '../context.js';
 class posts extends Component{
     state={
         posts:[]
     }
     componentDidMount(){
-        fetch('http://localhost:8080/boards/posts',{
+        let b= this.context;
+
+        fetch(`${b.API_URL}/boards/posts`,{
             method: "GET",
             headers: {
         'Content-Type': 'application/json',
@@ -34,5 +37,5 @@ class posts extends Component{
         );
     }
 }
-
+posts.contextType=MyContext;
 export default posts;
