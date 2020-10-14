@@ -26,8 +26,6 @@ class Analyze extends Component{
     {
         //fetch api 
         let b= this.context;
-
-        event.preventDefault();
         let data = new FormData();
         data.append('temp', document.getElementById("input").elements[0].files[0]);
         fetch(`${b.API_URL}/apicall1`, {
@@ -72,14 +70,47 @@ class Analyze extends Component{
             image: URL.createObjectURL(img)
           });
         }
-      };
+        let data = new FormData();
+        data.append('temp', document.getElementById("input").elements[0].files[0]);
+    
+          fetch("http://52.78.171.102:8080/apicall", {
+            method: "POST",
+            body: data,
+            headers: {
+                // 'Content-Type': 'multipart/form-data',
+                // 'Accept': 'application/json',
+            },
+          }).then((result) => {
+            return result.json();
+          }).then((result) => {
+            var txt = "";
+            for(const elem of result.images[0].fields) {
+                txt += elem.inferText + " ";
+            }
+            console.log(txt);
+            var regEx = /청\s?구\s?취\s?지/gmu;
+            var regEx1 = /청\s?구\s?원\s?인/gmu;
+            var split = txt.split(regEx);
+            if(split.length !== 1) {
+              var split1 = split[1].split(regEx1);
+            document.getElementById("purpose").innerHTML=split1[0];
+            document.getElementById("cause").innerHTML=split1[1];
+            }
+            else{
+                console.log(split);
+              var split2 = txt.split(regEx1);
+              if(split2.length !== 1) {
+                document.getElementById("cause").innerHTML=split2[1];
+              }
+            }});
+    };
     
     render()
     {
         if (!this.state.submit)
         {
         return(
-        <div className="relative w-2/4 object-center mr-0 mt-8 p-0 ml-auto mr-auto text-center">
+        <div className="relative w-240 object-center mr-0 mt-8 p-0 ml-auto mr-auto text-center mb-4">
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
         <strong className="font-bold">원고의 기준에서 소장을 작성해주세요!</strong>
         </div>
@@ -105,9 +136,6 @@ class Analyze extends Component{
                     <option value="13">기타</option> */}
                 </select>
             </div>
-            {/* <div className="pointer-events-none absolute inset-y-0 flex items-center text-gray-700">
-                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-            </div> */}
         </div>
         <div className="pt-2 w-3/4 text-left ml-auto mr-auto text-red-700 font-bold">
             소장 양식 입력
@@ -115,11 +143,16 @@ class Analyze extends Component{
         {this.state.useImage && 
         <form id="input">
             <input className="pt-2 w-1/3" type="file" name="myImage" onChange={this.onImageChange} />
-            <img alt="" className="w-3/4 ml-auto mr-auto" src={this.state.image} />
-        {!this.state.useImage && <div/>}
+            <div className="h-144 border overflow-y-scroll border-red-400 w-3/4 ml-auto mr-auto my-4">
+                <div className="w-1/2 ml-auto mr-auto mt-6 text-2xl font-bold text-red-700">소 장</div>
+                <div className="w-1/2 ml-auto mr-auto mt-2 text-xl font-bold text-red-700">청 구 취 지</div>
+                <textarea className="shadow appearance-none rounded h-48 w-4/5 my-2 px-3 py-2 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="purpose" type="text" placeholder="청구취지를 자세히 입력해주세요 &#10;청구취지 작성 예시&#10;1. 원고와 피고는 이혼한다.&#10;2. 피고는 원고에게 위자료로 금 300만원을 이혼성립과 동시에 지급하되, 그 익일부터 다 지급하는 날까지 년 15%의 지연이자를 더하여 지급한다."/>
+                <div className="w-1/2 ml-auto mr-auto text-xl font-bold text-red-700">청 구 원 인</div>
+                <textarea className="shadow appearance-none rounded h-48 w-4/5 my-4 px-3 py-2 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="cause" type="text" placeholder="청구원인을 자세히 입력해주세요 &#10;1. 당사자들의 관계&#10;2. 금전거래 또는 대여사실 &#10;3. 결론"/>
+            </div>
         </form>}
 
-        <button onClick={this.analyze} className="mb-3 bg-red-700 hover:bg-red-700 text-white font-bold mt-4 py-2 px-4 m-0 rounded ">유사판례 분석</button>
+        <button onClick={this.analyze} className="mb-3 bg-red-700 hover:bg-red-700 text-white font-bold py-2 px-4 m-0 rounded ">유사판례 분석</button>
         </div>
         
         </div>

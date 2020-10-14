@@ -19,7 +19,7 @@ class afterAnalyze extends Component{
                           ))}
                     </ul>
                 </div>
-                <div className="mb-4 w-2/3 ml-auto mr-auto overflow-y-scroll h-64">
+                <div className="mb-4 w-2/3 ml-auto mr-auto overflow-y-scroll h-96">
                     {this.props.ids.map((id)=>(
                         <Judgement key={id.ID} id={id}/>
                     ))}
