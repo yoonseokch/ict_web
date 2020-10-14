@@ -53,6 +53,7 @@ module.exports = {
         900: '#7b341e',
       },
       yellow: {
+        50: '#123421',
         100: '#fffff0',
         200: '#fefcbf',
         300: '#faf089',
@@ -150,7 +151,8 @@ module.exports = {
       '48': '12rem',
       '56': '14rem',
       '64': '16rem',
-      '96': '24rem'
+      '96': '24rem',
+      '144': '36rem'
     },
     backgroundColor: theme => theme('colors'),
     backgroundImage: {

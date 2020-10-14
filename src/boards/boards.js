@@ -1,5 +1,6 @@
 //This component is a bar which is displayed at the top of hompage
 import React,{Component} from 'react';
+import BoardBar from './BoardBar.js';
 import '../styles/boards.css';
 import '../styles/tailwind.css';
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
@@ -14,18 +15,7 @@ class Boards extends Component{
     {
         return(
             <div>
-                <div className="boardsBar">
-                    <ul className="boardul">
-                        <li className="boardlist">
-                            <a className="boardscategory" href="/boards?category=0">전체</a></li>
-                        <li className="boardlist">
-                            <a className="boardscategory" href="/boards?category=1">로봇후기 게시판</a></li>
-                        <li className="boardlist">
-                            <a className="boardscategory" href="/boards?category=2">재판후기 게시판</a></li>
-                        <li className="boardlist">
-                            <a className="boardscategory" href="/boards?category=3">자유게시판</a></li>
-                    </ul>
-                </div>
+                <BoardBar/>
                 <div className="background h-auto pb-3">
                     <div className="boardscenter">
                     <Router>

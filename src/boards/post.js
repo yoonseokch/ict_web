@@ -18,7 +18,7 @@ class post extends Component{
                     <div className="ml-5 mt-3 font-bold">
                     {this.props.post.title}
                     </div>
-                    <div className="w-10/12 ml-5 mt-1 pr-5 overflow-x-auto overflow-y-auto whitespace-normal h-5">
+                    <div className="w-10/12 ml-5 mt-1 pr-5 overflow-x-hidden overflow-y-hidden whitespace-normal h-5">
                     {this.props.post.content}
                     </div>
                 </div>
