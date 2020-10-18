@@ -13,7 +13,12 @@ class Information extends Component {
     {
         let b= this.context;
 
-        fetch(`${b.API_URL}/user/${parseInt(document.cookie.split("=")[1])}`)
+        fetch(`${b.API_URL}/user/${parseInt(document.cookie.split("=")[1])}`,
+        {
+            headers : {
+                'token': `${sessionStorage.getItem('token')}`,
+            }
+        })
         .then(response => response.json())
         .then((data)=>
         {    

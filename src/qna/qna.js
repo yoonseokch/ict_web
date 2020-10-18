@@ -6,7 +6,7 @@ class Qna extends Component{
     {
         return(
         <div className="pt-10 pb-10 w-full bg-gray-100 flex">
-            <div className="w-2/3 pb-10 ml-auto mr-auto bg-white">
+            <div className="w-240 border-4 border-white rounded-lg pb-10 ml-auto mr-auto bg-white">
                 
             </div>
         </div>

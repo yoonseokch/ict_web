@@ -12,6 +12,7 @@ class Reply extends Component{
         fetch(`${b.API_URL}/user/${this.props.reply.User_ID}`,{
             method: "GET",
             headers: {
+                'token': `${sessionStorage.getItem('token')}`,
             'Content-Type': 'application/json',
         }})
         .then(response => response.json())

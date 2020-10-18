@@ -24,6 +24,7 @@ class Login extends Component{
         fetch(`${b.API_URL}/login`, {
         method: "POST",
         headers: {
+            'token': `${sessionStorage.getItem('token')}`,
         'Content-Type': 'application/json',
         },
         body: JSON.stringify(a),
@@ -33,9 +34,12 @@ class Login extends Component{
         //console.log(data);
         if (data.success===true)
         {
+        console.log(data);
         document.cookie="user="+data.id;
+        this.props.change(data.id);
         alert("로그인 되었습니다.");
         window.location='/';
+        sessionStorage.setItem("token",data.token);
         //process.env.REACT_APP_USER="YES";
         }
         else

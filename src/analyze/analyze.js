@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import Afteranalyze from './afterAnalyze.js';
 import {MyContext} from '../context.js';
+
 class Analyze extends Component{
     state={
         useImage : true,
@@ -28,10 +29,12 @@ class Analyze extends Component{
         let b= this.context;
         let data = new FormData();
         data.append('temp', document.getElementById("input").elements[0].files[0]);
+     //   console.log(sessionStorage.getItem('token'));
         fetch(`${b.API_URL}/apicall1`, {
             method: 'POST',
             body: data,
             headers: {
+                'token': `${sessionStorage.getItem('token')}`
               //  'Content-Type': 'multipart/form-data',
             },
         }).then((result) => {
@@ -72,11 +75,12 @@ class Analyze extends Component{
         }
         let data = new FormData();
         data.append('temp', document.getElementById("input").elements[0].files[0]);
-    
-          fetch("http://52.78.171.102:8080/apicall", {
+            var b=this.context;
+          fetch(`${b.API_URL}/apicall`, {
             method: "POST",
             body: data,
             headers: {
+                'token': `${sessionStorage.getItem('token')}`
                 // 'Content-Type': 'multipart/form-data',
                 // 'Accept': 'application/json',
             },
@@ -110,7 +114,9 @@ class Analyze extends Component{
         if (!this.state.submit)
         {
         return(
-        <div className="relative w-240 object-center mr-0 mt-8 p-0 ml-auto mr-auto text-center mb-4">
+        <div className="bg-gray-100 w-full py-10"> 
+        <div className="shadow-xl bg-white w-240 pb-10 ml-auto mr-auto border-4 border-white rounded-lg"> 
+        <div className="relative w-192 object-center mr-0 pt-8 p-0 ml-auto mr-auto text-center mb-4">
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
         <strong className="font-bold">원고의 기준에서 소장을 작성해주세요!</strong>
         </div>
@@ -142,7 +148,7 @@ class Analyze extends Component{
         </div>
         {this.state.useImage && 
         <form id="input">
-            <input className="pt-2 w-1/3" type="file" name="myImage" onChange={this.onImageChange} />
+            <input className="pt-2 w-1/3 overflow-hidden" type="file" name="myImage" onChange={this.onImageChange} />
             <div className="h-144 border overflow-y-scroll border-red-400 w-3/4 ml-auto mr-auto my-4">
                 <div className="w-1/2 ml-auto mr-auto mt-6 text-2xl font-bold text-red-700">소 장</div>
                 <div className="w-1/2 ml-auto mr-auto mt-2 text-xl font-bold text-red-700">청 구 취 지</div>
@@ -155,6 +161,8 @@ class Analyze extends Component{
         <button onClick={this.analyze} className="mb-3 bg-red-700 hover:bg-red-700 text-white font-bold py-2 px-4 m-0 rounded ">유사판례 분석</button>
         </div>
         
+        </div>
+        </div>
         </div>
         );
         }

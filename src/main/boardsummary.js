@@ -10,8 +10,13 @@ class MainAnalyze extends Component {
     componentDidMount()
     {
         let b= this.context;
-
-        fetch(`${b.API_URL}/boards/${parseInt(this.props.type)}?limit=3`)
+        console.log(b.id);
+        fetch(`${b.API_URL}/boards/${parseInt(this.props.type)}?limit=3`,
+        {
+            headers: {
+                'token': `${sessionStorage.getItem('token')}`
+            },
+        })
         .then(response => response.json())
         .then((data)=>
         {    

@@ -8,8 +8,7 @@ class afterAnalyze extends Component{
     render()
     {
         return(
-
-            <div className="mt-3 w-1/2 ml-auto mr-auto bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+            <div className="mt-10 w-1/2 ml-auto mr-auto bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
                 <strong className="text-2xl">내 소장 키워드</strong>
                 <p className="pl-3 mt-2">내 소장 분석에서 비중 있게 분석 된 키워드입니다. </p>
                 <div className="mt-3 mb-3 overflow-x-scroll"> 

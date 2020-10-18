@@ -10,6 +10,7 @@ class judgement extends Component{
         fetch(`${b.API_URL}/user/judgement`, {
             method: "POST",
             headers: {
+                'token': `${sessionStorage.getItem('token')}`,
         'Content-Type': 'application/json',
         },
         body: JSON.stringify(a),
@@ -28,11 +29,18 @@ class judgement extends Component{
     }
     submit = (e) =>{
         // function for opening judgement 
-        var main = {OC:'ICTPoolC',
+        var main = 
+        {
+           OC:'ICTPoolC',
            target:'prec',
            ID: this.props.id.ID,
-           type:'HTML'};
-           fetch('http://www.law.go.kr/DRF/lawService.do?'+new URLSearchParams(main))
+           type:'HTML'
+        };
+           fetch('http://www.law.go.kr/DRF/lawService.do?'+new URLSearchParams(main),{
+               headers : {
+                'token': `${sessionStorage.getItem('token')}`
+               }
+           })
             .then((response)=>
             {    
                 window.open(response.url);

@@ -49,6 +49,7 @@ class register extends Component
         fetch(`${b.API_URL}/register`, {
             method: "POST",
             headers: {
+                'token': `${sessionStorage.getItem('token')}`,
         'Content-Type': 'application/json',
         },
         body: JSON.stringify(a),

@@ -18,6 +18,7 @@ class WriteReply extends Component{
         fetch(`${b.API_URL}/reply/write`,{
             method: "POST",
             headers: {
+                'token': `${sessionStorage.getItem('token')}`,
                 'Content-Type': 'application/json',
                 },
             body: JSON.stringify(a),
@@ -31,7 +32,11 @@ class WriteReply extends Component{
     componentDidMount(){
         let b= this.context;
 
-        fetch(`${b.API_URL}/user/${parseInt(document.cookie.split("=")[1])}`)
+        fetch(`${b.API_URL}/user/${parseInt(document.cookie.split("=")[1])}`,{
+            headers : {
+                'token': `${sessionStorage.getItem('token')}`,
+            }
+        })
         .then(response => response.json())
         .then((data)=>
         {    

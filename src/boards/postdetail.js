@@ -14,7 +14,10 @@ class postdetail extends Component{
         let b= this.context;
 
         fetch(`${b.API_URL}/boards/${this.props.location.pathname.split("/")[2]}`,{
-            method: "DELETE"
+            method: "DELETE",
+            headers : {
+                'token': `${sessionStorage.getItem('token')}`
+            }
         })
         .then(response => response.json())
         .then((data)=>
@@ -28,14 +31,23 @@ class postdetail extends Component{
       //  console.log(this.props.location.pathname.split("/")[2]);
         let b= this.context;
 
-        fetch(`${b.API_URL}/boards/posts/${this.props.location.pathname.split("/")[2]}`)
+        fetch(`${b.API_URL}/boards/posts/${this.props.location.pathname.split("/")[2]}`,
+        {
+            headers : {
+                'token': `${sessionStorage.getItem('token')}`
+            }
+        })
         .then(response => response.json())
         .then((data)=>
         {
             console.log(data);
 
             this.setState({post : data});
-            fetch(`${b.API_URL}/reply/${this.props.location.pathname.split("/")[2]}`)
+            fetch(`${b.API_URL}/reply/${this.props.location.pathname.split("/")[2]}`,{
+                headers : {
+                    'token': `${sessionStorage.getItem('token')}`
+                }
+            })
             .then(response => response.json())
             .then((data)=>
             {    

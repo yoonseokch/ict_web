@@ -9,6 +9,7 @@ import boards from './boards/boards.js';
 import Mypage from './mypage/mypage.js';
 import Main from './main/main.js';
 import Qna from './qna/qna.js';
+import Interpret from './interpret/interpret.js';
 import { MyContext, LOCAL_URL, PRODUCTION_URL } from './context.js';
 class App extends Component
 {
@@ -16,22 +17,34 @@ class App extends Component
   {
     super(props);
     this.state=({
-      user:-1,
       API_URL : process.env.REACT_APP_LOCAL ? LOCAL_URL : PRODUCTION_URL
     });
   }
-  increase = () =>  
+  change = (e) =>
   {
-    document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    window.location='/';
+    console.log(e);
+    this.setState(
+      {
+        user: e
+      }
+    )
   }
   render()
   {
     var a=document.cookie.split("=");
-    if (a[1]!==undefined)
+    console.log(this.state.user);
+    if ((a[1]!==undefined))
     {
       return(
-        <MyContext.Provider value={{API_URL : this.state.API_URL}}>
+        <MyContext.Provider value=
+        {
+          {
+            API_URL : this.state.API_URL,
+            id: this.state.id, 
+            setID: this.state.change
+          }
+        }
+        >
         <Bar/>
           <Router>
             <Switch>
@@ -40,6 +53,7 @@ class App extends Component
             <Route path="/analyze" component={analyze}/>
             <Route path="/mypage" component={Mypage}/>
             <Route path="/qna" component={Qna} />
+            <Route path="/interpret" component={Interpret} />
             <Redirect path="*" to="/" />
             </Switch>
           </Router>
@@ -52,7 +66,9 @@ class App extends Component
         <div>
         <main>
           <Router>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" >
+            <Login change={this.change}></Login>
+          </Route>
           <Route path="/register" component={Register}/>
           </Router>
         </main>

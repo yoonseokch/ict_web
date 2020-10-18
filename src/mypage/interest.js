@@ -19,6 +19,7 @@ class Information extends Component {
         fetch(`${b.API_URL}/user/interests`, {
             method: "DELETE",
             headers: {
+                'token': `${sessionStorage.getItem('token')}`,
         'Content-Type': 'application/json',
         },
         body: JSON.stringify(a),
@@ -51,6 +52,7 @@ class Information extends Component {
                     fetch(`${b.API_URL}/user/interests`, {
                         method: "POST",
                         headers: {
+                            'token': `${sessionStorage.getItem('token')}`,
                     'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(a),
@@ -81,7 +83,12 @@ class Information extends Component {
     {
         let b= this.context;
 
-        fetch(`${b.API_URL}/user/interests/${parseInt(document.cookie.split("=")[1])}`)
+        fetch(`${b.API_URL}/user/interests/${parseInt(document.cookie.split("=")[1])}`,
+        {
+            headers:{
+                'token': `${sessionStorage.getItem('token')}`,
+            }
+        })
         .then(response => response.json())
         .then((data)=>
         {    

@@ -8,7 +8,7 @@ class Main extends Component {
     render() {
         return ( 
             <div className="pt-10 pb-10 w-full bg-gray-100 flex">
-            <div className="w-2/3 pb-10 ml-auto mr-auto bg-white">
+            <div className="shadow-xl w-320 pb-10 ml-auto mr-auto bg-white">
                 <Analyze/>
                 <Document/>
                 <Boards/>

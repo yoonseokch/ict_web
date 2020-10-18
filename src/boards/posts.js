@@ -12,6 +12,7 @@ class posts extends Component{
         fetch(`${b.API_URL}/boards/posts`,{
             method: "GET",
             headers: {
+                'token': `${sessionStorage.getItem('token')}`,
         'Content-Type': 'application/json',
         }})
         .then(response => response.json())
