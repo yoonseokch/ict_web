@@ -1,5 +1,5 @@
 //This component is a bar which is displayed at the top of hompage
-import Lawbot from '../img/Lawbot.png';
+import Lawbot from '../img/logo.png';
 import React,{Component} from 'react';
 import '../styles/Login.css';
 import {MyContext} from '../context.js';
@@ -19,8 +19,8 @@ class Login extends Component{
         var a={
 
         };
-        a.userID=this.state.email;
-        a.userPW=this.state.password;
+        a.userID=document.getElementById("ID").value;
+        a.userPW=document.getElementById("password").value;
         fetch(`${b.API_URL}/login`, {
         method: "POST",
         headers: {
@@ -51,19 +51,31 @@ class Login extends Component{
     render()
     {
         return(
-            <div className="background">  
-                <img className="loginimg" src={Lawbot} alt=""></img>
-                <div className="loginBoard">
-                <div className="password">
-                <input className="registerinput" type="text" value={this.state.email} onChange={this.handleChange} name="email" placeholder="이메일 또는 전화번호" autoFocus="1" />
+        <div className="pt-32 ml-auto mr-auto">
+            <img className="block ml-auto mr-auto" src={Lawbot} alt="로봇사진"></img>
+            <div className="bg-white shadow-md w-144 ml-auto mr-auto block rounded px-8 pt-6 pb-8 mb-4">
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" for="ID">
+                    ID
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ID" type="text" placeholder="Username"/>
                 </div>
-                <div className="password">
-                <input className="registerinput" type="password" value={this.state.password} onChange={this.handleChange} name="password" placeholder="비밀번호" autoFocus="2" />
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                    Password
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"/>
                 </div>
-                <button className="submit" onClick={this.submit}>로그인</button>
-                <a href="/register" className="register">회원가입</a>
+                <div class="items-center justify-between">
+                <button onClick={this.submit} class="block bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                로그인
+                </button> 
+                <button class="mt-2 bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                회원가입
+                </button>     
                 </div>
             </div>
+        </div>
         );
     }
 }
