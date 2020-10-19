@@ -11,8 +11,6 @@ class Information extends Component {
     };
     delete = (e) =>{
         let b= this.context;
-
-        console.log(e.target);
         var a={};
         a.User_ID=parseInt(document.cookie.split("=")[1]);
         a.Category_ID=this.state.fieldName.indexOf(e.target.value);
@@ -26,7 +24,6 @@ class Information extends Component {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(this.state.fields);
             window.location.href="/mypage/interests";
         })
     }
@@ -38,7 +35,6 @@ class Information extends Component {
 
         if (e.key==="Enter")
         {
-            console.log("i");
             if (this.state.fieldName.includes(document.getElementById("input").value))
             {
                 if (!this.state.fields.includes(document.getElementById("input").value))
@@ -46,7 +42,6 @@ class Information extends Component {
                     var a={};
                     a.User_ID=parseInt(document.cookie.split("=")[1]);
                     a.Category_ID=this.state.fieldName.indexOf(document.getElementById("input").value);
-                    console.log(a);
                     let b= this.context;
 
                     fetch(`${b.API_URL}/user/interests`, {
@@ -59,7 +54,6 @@ class Information extends Component {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log(this.state.fields);
                         window.location.href="/mypage/interests";
                     })
                 }
@@ -92,7 +86,6 @@ class Information extends Component {
         .then(response => response.json())
         .then((data)=>
         {    
-            console.log(data);
             var a=[];
             for (var elem of data)
             {

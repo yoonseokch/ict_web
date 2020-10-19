@@ -22,7 +22,6 @@ class Information extends Component {
         .then(response => response.json())
         .then((data)=>
         {    
-            console.log(data);
             this.setState({user : data});
             if (this.state.user.lawyer===1)
             {

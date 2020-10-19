@@ -1,18 +1,43 @@
 import React,{Component} from 'react';
 import '../styles/Login.css';
-import Lawbot from '../img/Lawbot.png';
+import Lawbot from '../img/logo.png';
 import {MyContext} from '../context.js';
 class register extends Component
 {
     state= {
-        userID: '',
-        userPW: '',
-        name : '',
-        birthdate : '',
-        email : '',
-        sex : '',
-        isLawyer : '',
-        phone: ''
+        canMake : false
+    }
+    redundancyCheck = () =>{
+        let b= this.context;
+        var data={
+            userID : document.getElementById("ID").value
+        };
+        fetch(`${b.API_URL}/register/check`,{
+            method : 'POST',
+            headers : {
+                token : sessionStorage.getItem('token'),
+                'Content-Type': 'application/json',
+            },
+            body :JSON.stringify(data)
+        }).then(response => response.json())
+        .then((data)=>
+        {
+            if (data.success===true)
+            {
+                alert("회원가입이 가능한 아이디입니다");
+                this.setState({
+                    canMake: true
+                });
+                document.getElementById("ID").disabled=true;
+            }
+            else
+            {
+                alert("이미 있는 아이디입니다");
+            }
+        })
+    }
+    goHome = () =>{
+        window.location.href="/"
     }
     handleChange = (e) => {
         this.setState({
@@ -56,7 +81,6 @@ class register extends Component
         })
         .then(response => response.json())
         .then(data => {
-            //console.log(data);
         if (data.success===true)
         {
         alert("회원가입을 성공하셨습니다");
@@ -71,37 +95,40 @@ class register extends Component
     }
     render()
     {
-    //    var data=this.state;
-    //    var list=data.products.map(info => (<div>info</div>));
         return(
-            <div className="background">
-                <img className="loginimg" src={Lawbot} alt=""></img>
-                <div className="registerBoard">
-                <div className="password">
-                <input className="registerinput" type="text" value={this.state.userID} onChange={this.handleChange} name="userID" placeholder="아이디" autoFocus="1" />
-                </div>
-                <div className="password">
-                <input className="registerinput" type="password" value={this.state.userPW} onChange={this.handleChange} name="userPW" placeholder="비밀번호"/>
-                </div>
-                <div className="password">
-                <input className="registerinput" type="text" value={this.state.name} onChange={this.handleChange} name="name" placeholder="이름"/>
-                </div>
-                <div className="password">
-                <input className="registerinput" type="Date" value={this.state.birthdate} onChange={this.handleChange} name="birthdate" placeholder="생일"/>
-                </div>
-                <div className="password">
-                <input className="registerinput" type="text" value={this.state.email} onChange={this.handleChange} name="email" placeholder="이메일 주소"/>
-                </div>
-                <div className="password">
-                <input className="registerinput" type="text" value={this.state.sex} onChange={this.handleChange} name="sex" placeholder="남 or 여"/>
-                </div>
-                <div className="password">
-                <input className="registerinput" type="text" value={this.state.isLawyer} onChange={this.handleChange} name="isLawyer" placeholder="변호사 여부" />
-                </div>
-                <div className="password">
-                <input className="registerinput" type="text" value={this.state.phone} onChange={this.handleChange} name="phone" placeholder="전화번호" />
-                </div>
-                <button onClick={this.submit} className="register">회원가입</button>
+            <div>
+                <img onClick={this.goHome} className="block ml-auto mr-auto" src={Lawbot} alt="로봇사진"></img>
+                <div className="bg-white shadow-md w-144 ml-auto mr-auto block rounded px-8 pt-6 pb-8 mb-4">
+                    <div className="mb-6 py-1">
+                        <label className="pl-1 block text-gray-700 text-sm font-bold mb-2">
+                        아이디
+                        </label>
+                        <input className="shadow w-3/4 mr-6 appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ID" type="text" placeholder="ID"/>
+                        <button onClick={this.redundancyCheck} className="w-1/5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-0">중복확인</button>
+                    </div>
+                    <div className="mb-4">
+                        <label className="pl-1 block text-gray-700 text-sm font-bold mb-2">
+                        패스워드
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"/>
+                    </div>
+                    <div className="mb-4">
+                        <label className="pl-1 block text-gray-700 text-sm font-bold mb-2">
+                        이름
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="이름"/>
+                    </div>
+                    <div className="mb-4">
+                        <label className="pl-1 block text-gray-700 text-sm font-bold mb-2">
+                        생년월일
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="birth" type="DATE" placeholder=""/>
+                    </div>
+                    <div className="items-center justify-between">
+                    <button onClick={()=>{window.location.href="/register"}} className="mt-2 bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    회원가입
+                    </button>     
+                    </div>
                 </div>
             </div>
         )

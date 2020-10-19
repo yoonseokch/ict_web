@@ -29,7 +29,6 @@ class Analyze extends Component{
         let b= this.context;
         let data = new FormData();
         data.append('temp', document.getElementById("input").elements[0].files[0]);
-     //   console.log(sessionStorage.getItem('token'));
         fetch(`${b.API_URL}/apicall1`, {
             method: 'POST',
             body: data,
@@ -38,24 +37,20 @@ class Analyze extends Component{
               //  'Content-Type': 'multipart/form-data',
             },
         }).then((result) => {
-            console.log("hi");
             return result.json();
         }).then((result) => {
             var keywords=[];
-            console.log(result);
             for(const elem of result.images[0].fields) {
                 if (keywords.length<=10)
                 {
                 keywords.push(elem.inferText);
                 }
             }
-            console.log(keywords);
             this.setState({
                 submit : true,
                 keywords: keywords,
                 ids : result.ids
             });
-           // console.log(result.ids);
         });
     }
     useText = () =>
@@ -91,7 +86,6 @@ class Analyze extends Component{
             for(const elem of result.images[0].fields) {
                 txt += elem.inferText + " ";
             }
-            console.log(txt);
             var regEx = /청\s?구\s?취\s?지/gmu;
             var regEx1 = /청\s?구\s?원\s?인/gmu;
             var split = txt.split(regEx);
@@ -101,7 +95,6 @@ class Analyze extends Component{
             document.getElementById("cause").innerHTML=split1[1];
             }
             else{
-                console.log(split);
               var split2 = txt.split(regEx1);
               if(split2.length !== 1) {
                 document.getElementById("cause").innerHTML=split2[1];

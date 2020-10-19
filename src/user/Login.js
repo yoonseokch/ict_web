@@ -31,16 +31,13 @@ class Login extends Component{
         })
         .then(response => response.json())
         .then(data => {
-        //console.log(data);
         if (data.success===true)
         {
-        console.log(data);
-        document.cookie="user="+data.id;
-        this.props.change(data.id);
-        alert("로그인 되었습니다.");
-        window.location='/';
-        sessionStorage.setItem("token",data.token);
-        //process.env.REACT_APP_USER="YES";
+            document.cookie="user="+data.id;
+            this.props.change(data.id);
+            alert("로그인 되었습니다.");
+            window.location='/';
+            sessionStorage.setItem("token",data.token);
         }
         else
         {
@@ -56,13 +53,13 @@ class Login extends Component{
             <div className="bg-white shadow-md w-144 ml-auto mr-auto block rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" for="ID">
-                    ID
+                    아이디
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ID" type="text" placeholder="Username"/>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ID" type="text" placeholder="ID"/>
                 </div>
                 <div class="mb-6">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                    Password
+                    패스워드
                     </label>
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"/>
                 </div>
@@ -70,7 +67,7 @@ class Login extends Component{
                 <button onClick={this.submit} class="block bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                 로그인
                 </button> 
-                <button class="mt-2 bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                <button onClick={()=>{window.location.href="/register"}} class="mt-2 bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                 회원가입
                 </button>     
                 </div>

@@ -22,13 +22,11 @@ class postdetail extends Component{
         .then(response => response.json())
         .then((data)=>
         {    
-            console.log("글 삭제가 완료되었습니다!");
             window.location.href="/boards";
         });
         
     }
     componentDidMount(){
-      //  console.log(this.props.location.pathname.split("/")[2]);
         let b= this.context;
 
         fetch(`${b.API_URL}/boards/posts/${this.props.location.pathname.split("/")[2]}`,
@@ -40,8 +38,6 @@ class postdetail extends Component{
         .then(response => response.json())
         .then((data)=>
         {
-            console.log(data);
-
             this.setState({post : data});
             fetch(`${b.API_URL}/reply/${this.props.location.pathname.split("/")[2]}`,{
                 headers : {
@@ -52,7 +48,6 @@ class postdetail extends Component{
             .then((data)=>
             {    
                 this.setState({replies : data});
-                console.log(this.state.replies);
             });
         });
     }

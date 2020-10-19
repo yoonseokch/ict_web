@@ -11,7 +11,6 @@ class Interpret extends Component
         explanation:""
     }
     increase = () =>{
-        console.log(pdfjs.numPages);
         if (this.state.page!==pdfjs.numPages)
         {
         this.setState({
@@ -39,8 +38,6 @@ class Interpret extends Component
             if(res.status===200){
               return res.json();
             }}).then(json =>{
-              //console.log("json",json.items[0].description)
-              //this.setState({explanation : json.items[0].description})
               var array = [1,2,3];
               var target1 = "cid=42131&";
               var target2 = "cid=40942&";
@@ -73,18 +70,15 @@ class Interpret extends Component
               if(found1===false && found2===false){
                 this.setState({explanation : "Not found"});
               }
-              console.log(this.state.explanation);
             });
         });
       }
     onImageChange = (e) =>
     {
-        console.log(e.target.files[0]);
         this.setState({
             file: e.target.files[0],
             image: URL.createObjectURL(e.target.files[0])
         })
-        console.log(this.state.file);
     }
     render()
     {

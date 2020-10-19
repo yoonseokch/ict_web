@@ -22,7 +22,6 @@ class App extends Component
   }
   change = (e) =>
   {
-    console.log(e);
     this.setState(
       {
         user: e
@@ -32,7 +31,6 @@ class App extends Component
   render()
   {
     var a=document.cookie.split("=");
-    console.log(this.state.user);
     if ((a[1]!==undefined))
     {
       return(

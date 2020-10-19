@@ -10,7 +10,6 @@ class MainAnalyze extends Component {
     componentDidMount()
     {
         let b= this.context;
-        console.log(b.id);
         fetch(`${b.API_URL}/boards/${parseInt(this.props.type)}?limit=3`,
         {
             headers: {
@@ -20,7 +19,6 @@ class MainAnalyze extends Component {
         .then(response => response.json())
         .then((data)=>
         {    
-            console.log(data);
             if (data.length===3)
             {
                 this.setState({posts : data});

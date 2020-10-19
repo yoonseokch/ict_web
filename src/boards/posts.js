@@ -18,10 +18,8 @@ class posts extends Component{
         .then(response => response.json())
         .then((data)=>
         {
-            console.log(data);
 
             this.setState({posts : data});
-            console.log(this.state.posts[0]);
         })
     }
     render()

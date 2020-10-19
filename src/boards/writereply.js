@@ -14,7 +14,6 @@ class WriteReply extends Component{
         a.content=document.getElementById("input1").value;
         a.Post_ID=parseInt(this.props.location.pathname.split("/")[2]);
         a.User_ID=this.state.user.ID;
-     //   console.log(a);
         fetch(`${b.API_URL}/reply/write`,{
             method: "POST",
             headers: {
@@ -40,9 +39,7 @@ class WriteReply extends Component{
         .then(response => response.json())
         .then((data)=>
         {    
-          //  console.log(data);
             this.setState({user : data});
-
         });
     }
     render()

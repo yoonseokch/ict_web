@@ -6,7 +6,6 @@ class post extends Component{
         posts:[]
     }
     locate = ()=>{
-      //  console.log(window.location.search.split('?category='));
         window.location.href="/boards/"+this.props.post.ID;
     }
     render()
