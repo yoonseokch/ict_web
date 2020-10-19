@@ -23,6 +23,7 @@ class Mypage extends Component {
                             <Interest />
                         </Route>
                         <Redirect path="/mypage/*" to="/mypage/profile" />
+                        <Redirect path="/mypage" to="/mypage/profile" />
                     </Switch>
                     </Router>
                     </div>

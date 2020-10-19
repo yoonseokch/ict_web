@@ -31,11 +31,22 @@ class register extends Component
             
         }
     }
-    redundancyCheck = () =>{
+    redundancyCheck = () =>
+    {
         let b= this.context;
         var data={
             userID : document.getElementById("ID").value
         };
+        if (data.userID.length<5)
+        {
+            window.alert('아이디는 5자 이상이어야 합니다');
+            return;
+        }
+        if (data.userID.length>20)
+        {
+            window.alert('아이디는 20자 이하이어야 합니다');
+            return;
+        }
         fetch(`${b.API_URL}/register/check`,{
             method : 'POST',
             headers : {
@@ -60,14 +71,6 @@ class register extends Component
             }
         })
     }
-    goHome = () =>{
-        window.location.href="/"
-    }
-    handleChange = (e) => {
-        this.setState({
-          [e.target.name]: e.target.value
-        });
-      }
     submit = () =>
     {
         var a={
