@@ -12,7 +12,6 @@ class Information extends Component {
     delete = (e) =>{
         let b= this.context;
         var a={};
-        a.User_ID=parseInt(document.cookie.split("=")[1]);
         a.Category_ID=this.state.fieldName.indexOf(e.target.value);
         fetch(`${b.API_URL}/user/interests`, {
             method: "DELETE",
@@ -32,7 +31,6 @@ class Information extends Component {
         this.change();
     }
     keyup = (e) => {
-
         if (e.key==="Enter")
         {
             if (this.state.fieldName.includes(document.getElementById("input").value))
@@ -40,10 +38,8 @@ class Information extends Component {
                 if (!this.state.fields.includes(document.getElementById("input").value))
                 {
                     var a={};
-                    a.User_ID=parseInt(document.cookie.split("=")[1]);
                     a.Category_ID=this.state.fieldName.indexOf(document.getElementById("input").value);
                     let b= this.context;
-
                     fetch(`${b.API_URL}/user/interests`, {
                         method: "POST",
                         headers: {
@@ -77,7 +73,7 @@ class Information extends Component {
     {
         let b= this.context;
 
-        fetch(`${b.API_URL}/user/interests/${parseInt(document.cookie.split("=")[1])}`,
+        fetch(`${b.API_URL}/user/interests/`,
         {
             headers:{
                 'token': `${sessionStorage.getItem('token')}`,

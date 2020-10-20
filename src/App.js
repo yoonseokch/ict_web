@@ -30,8 +30,8 @@ class App extends Component
   }
   render()
   {
-    var a=document.cookie.split("=");
-    if ((a[1]!==undefined))
+    var a=sessionStorage.getItem('token');
+    if ((a!==null))
     {
       return(
         <MyContext.Provider value=

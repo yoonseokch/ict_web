@@ -15,7 +15,6 @@ class New extends Component{
         a.boardCategory= parseInt(e.options[e.selectedIndex].value);
         a.title=document.getElementById("title").value;
         a.content=document.getElementById("content").value;
-        a.User_ID=parseInt(document.cookie.split("=")[1]);
         fetch(`${b.API_URL}/boards/write`, {
             method: "POST",
             headers: {

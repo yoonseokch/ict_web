@@ -7,12 +7,8 @@ class Bar extends Component{
         var date = new Date();
         date.setDate(date.getDate() - 1);
 
-        var willCookie = "";
-        willCookie += "user=Value;";
-        willCookie += "Expires=" + date.toUTCString();
         sessionStorage.removeItem("token");
         // 쿠키를 집어넣는다.
-        document.cookie = willCookie;
         alert("로그아웃 되었습니다");
         window.location.href="/";
     }

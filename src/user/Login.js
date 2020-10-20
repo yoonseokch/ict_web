@@ -33,7 +33,6 @@ class Login extends Component{
         .then(data => {
         if (data.success===true)
         {
-            document.cookie="user="+data.id;
             this.props.change(data.id);
             alert("로그인 되었습니다.");
             window.location='/';

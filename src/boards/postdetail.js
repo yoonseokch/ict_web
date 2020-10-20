@@ -28,7 +28,15 @@ class postdetail extends Component{
     }
     componentDidMount(){
         let b= this.context;
-
+        fetch(`${b.API_URL}/user`,
+        {
+            headers : {
+                'token': `${sessionStorage.getItem('token')}`
+            }
+        }).then(res=>res.json())
+        .then((data)=>{
+            this.setState({user:data});
+        })
         fetch(`${b.API_URL}/boards/posts/${this.props.location.pathname.split("/")[2]}`,
         {
             headers : {
@@ -64,7 +72,7 @@ class postdetail extends Component{
             </div>
             </div>
 
-            {(this.state.post.User_ID===parseInt(document.cookie.split("=")[1]))&&<button type="button" onClick={this.postdelete} className="ml-3 mb-3 bg-red-700 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ">
+            {(this.state.post.User_ID===this.state.user.ID)&&<button type="button" onClick={this.postdelete} className="ml-3 mb-3 bg-red-700 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ">
                         삭제하기
                         </button>
             }

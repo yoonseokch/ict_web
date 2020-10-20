@@ -26,7 +26,7 @@ class Analyze extends Component{
     analyze = (event) =>
     {
         //fetch api 
-        let b= this.context;
+        var b= this.context;
         let data = new FormData();
         data.append('temp', document.getElementById("input").elements[0].files[0]);
         fetch(`${b.API_URL}/apicall1`, {

@@ -31,7 +31,7 @@ class WriteReply extends Component{
     componentDidMount(){
         let b= this.context;
 
-        fetch(`${b.API_URL}/user/${parseInt(document.cookie.split("=")[1])}`,{
+        fetch(`${b.API_URL}/user/`,{
             headers : {
                 'token': `${sessionStorage.getItem('token')}`,
             }

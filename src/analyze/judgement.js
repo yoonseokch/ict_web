@@ -4,7 +4,6 @@ class judgement extends Component{
     myjudgement = () =>{
         let b= this.context;
         var a={};
-        a.User_ID=parseInt(document.cookie.split("=")[1]);
         a.Precedent_ID=this.props.id.ID;
         fetch(`${b.API_URL}/user/judgement`, {
             method: "POST",
