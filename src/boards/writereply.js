@@ -22,7 +22,6 @@ class WriteReply extends Component{
             alert("댓글을 입력해주세요!");
             return;
         }
-        a.ID=parseInt(document.URL.split('/')[4]);
         a.Post_ID=parseInt(this.props.location.pathname.split("/")[2]);
         a.User_ID=this.state.user.ID;
         console.log(a);
