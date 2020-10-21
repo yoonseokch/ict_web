@@ -7,13 +7,25 @@ class WriteReply extends Component{
     state={
         user:[]
     }
+    enter = (event) => {
+        if (event.key==="Enter"){
+            this.submit();
+        }
+    }
     submit = () => {
         let b= this.context;
-
         var a={};
         a.content=document.getElementById("input1").value;
+        console.log(document.URL);
+        if (a.content==="")
+        {
+            alert("댓글을 입력해주세요!");
+            return;
+        }
+        a.ID=parseInt(document.URL.split('/')[4]);
         a.Post_ID=parseInt(this.props.location.pathname.split("/")[2]);
         a.User_ID=this.state.user.ID;
+        console.log(a);
         fetch(`${b.API_URL}/reply/write`,{
             method: "POST",
             headers: {
@@ -25,7 +37,8 @@ class WriteReply extends Component{
         .then(response => response.json())
         .then((data)=>
         {    
-            document.getElementById("input1").value="";
+            
+            window.location.href="/boards/"+document.URL.split("/")[4];
         });
     }
     componentDidMount(){
@@ -46,11 +59,10 @@ class WriteReply extends Component{
     {
         return(
             <div className="w-full bg-gray-100 h-10 overflox-x-scroll flex m-0">
-                <input id="input1" className="pl-3 w-full bg-gray-100 text-sm focus:outline-none border" type="text" placeholder="댓글을 입력하세요"></input>
+                <input id="input1" className="pl-3 w-full bg-gray-100 text-sm focus:outline-none border" onKeyPress={this.enter} type="text" placeholder="댓글을 입력하세요"></input>
                 <div onClick={this.submit} className="w-10 px-1 py-1">
                 <img alt="write" src={Write}/>
                 </div>
-                
             </div>
         );
     }

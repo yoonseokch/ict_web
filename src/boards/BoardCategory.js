@@ -16,6 +16,13 @@ class BoardCategory extends Component{
                 document.getElementById(parseInt(a)).classList.add("border-red-700");
             }
         }
+        else
+        {
+            if (this.props.value===0)
+            {
+                document.getElementById(0).classList.add("border-red-700");
+            }
+        }
     }
     render()
     {
