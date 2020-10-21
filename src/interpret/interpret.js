@@ -25,9 +25,10 @@ class Interpret extends Component
             return;
         }
         var data={
-            data : document.getElementById("input").value
+            query : document.getElementById("input").value
         };
         var b=this.context;
+        console.log(data);
         fetch(`${b.API_URL}/interpret`,{
             method : 'POST',
             headers : {
@@ -38,6 +39,10 @@ class Interpret extends Component
         }).then(res => res.json())
         .then ((data)=>{
             document.getElementById("result").innerHTML=data.data;
+            if (data.data==="")
+            {
+                document.getElementById("result").innerHTML="관련 정보를 찾을수 없습니다";
+            }
         })
       }
     onImageChange = (e) =>

@@ -20,7 +20,7 @@ class afterAnalyze extends Component{
                 </div>
                 <div className="mb-4 w-2/3 ml-auto mr-auto overflow-y-scroll h-96">
                     {this.props.ids.map((id)=>(
-                        <Judgement key={id.ID} id={id}/>
+                        <Judgement key={id} id={id}/>
                     ))}
                 </div>
                 <div onClick={this.reload} className="mb-3 w-1/3 ml-auto mr-auto border border-red-700 text-center font-semibold">다른 사례 분석하기</div>

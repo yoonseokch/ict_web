@@ -16,7 +16,6 @@ class WriteReply extends Component{
         let b= this.context;
         var a={};
         a.content=document.getElementById("input1").value;
-        console.log(document.URL);
         if (a.content==="")
         {
             alert("댓글을 입력해주세요!");
@@ -24,7 +23,6 @@ class WriteReply extends Component{
         }
         a.Post_ID=parseInt(this.props.location.pathname.split("/")[2]);
         a.User_ID=this.state.user.ID;
-        console.log(a);
         fetch(`${b.API_URL}/reply/write`,{
             method: "POST",
             headers: {

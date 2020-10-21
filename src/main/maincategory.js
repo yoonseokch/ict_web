@@ -12,7 +12,6 @@ class Maincategory extends Component {
         images : []
     }
     componentDidMount(){
-        console.log(this.props.value);
         this.setState({
             href:"/analyze?value="+this.props.index,
         })

@@ -11,7 +11,10 @@ class Analyze extends Component{
             "이혼","결혼","재혼","삼혼","석주형","바보",
         ],
         ids : [
-            { ID:64440 , caseName: "손해배상(기)"},{ ID:64440 , caseName: "손해배상(기)"},{ ID:64440 , caseName: "손해배상(기)"},{ ID:64440 , caseName: "손해배상(기)"},{ ID:64440 , caseName: "손해배상(기)"},{ ID:64440 , caseName: "손해배상(기)"},{ ID:64440 , caseName: "손해배상(기)"},{ ID:64440 , caseName: "손해배상(기)"},{ ID:64440 , caseName: "손해배상(기)"},{ ID:64440 , caseName: "손해배상(기)"}
+            11111
+        ],
+        caseName : [
+            "손해배상(자)","손해배상(산)","손해배상(공)","손해배상(언)","손해배상(지)","손해배상(의)","손해배상(건)","손해배상(국)","손해배상(기)"
         ]
     }
     componentDidMount(){
@@ -27,29 +30,26 @@ class Analyze extends Component{
     {
         //fetch api 
         var b= this.context;
-        let data = new FormData();
-        data.append('temp', document.getElementById("input").elements[0].files[0]);
-        fetch(`${b.API_URL}/apicall1`, {
+        var a={
+            purpose:document.getElementById("purpose").value,
+            cause:document.getElementById("cause").value,
+            caseName:this.state.caseName[document.getElementById("grid-state").value],
+            method:"cos"
+        };
+        fetch(`${b.API_URL}/analyze`, {
             method: 'POST',
-            body: data,
             headers: {
-                'token': `${sessionStorage.getItem('token')}`
-              //  'Content-Type': 'multipart/form-data',
+                'token': `${sessionStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
             },
+            body: JSON.stringify(a),
         }).then((result) => {
             return result.json();
         }).then((result) => {
-            var keywords=[];
-            for(const elem of result.images[0].fields) {
-                if (keywords.length<=10)
-                {
-                keywords.push(elem.inferText);
-                }
-            }
             this.setState({
                 submit : true,
-                keywords: keywords,
-                ids : result.ids
+                keywords: result.keywords[0],
+                ids : result.ids[0]
             });
         });
     }
