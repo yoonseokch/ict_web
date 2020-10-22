@@ -6,7 +6,7 @@ import Reply from './reply.js';
 import {MyContext} from '../context.js';
 class postdetail extends Component{
     state={
-        post:[],
+        post:{},
         user:[],
         replies:[]
     }
@@ -57,10 +57,23 @@ class postdetail extends Component{
             {    
                 this.setState({replies : data});
             });
+        }).then(()=>{
+            if (this.state.post===null)
+            {
+                window.location.href="/boards";
+            }
         });
     }
     render()
     {
+        if (this.state.post===null)
+        {
+            return (
+                <div></div>
+            )
+        }
+        else
+        {
         return(
             <div className="whitespace-normal">
             <div className="w-full bg-white shadow-md rounded px-8 pt-6 pb-8">
@@ -86,6 +99,7 @@ class postdetail extends Component{
             </div>
             </div>
         );
+        }
     }
 }
 postdetail.contextType=MyContext;
