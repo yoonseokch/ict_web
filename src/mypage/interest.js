@@ -96,7 +96,7 @@ class Information extends Component {
                 <div className="font-semibold text-2xl">
                   내 관심분야
                 </div>
-                <div className="flex overflow-y-scroll bg-gray-100 w-3/5 h-40 mt-16 rounded-sm">
+                <div className="flex overflow-hidden bg-gray-100 w-3/5 h-40 mt-16 rounded-sm">
                     {(this.state.fields.length===0) && 
                     <p className="block ml-auto mr-auto mt-16 text-xl font-bold ">관심분야가 없습니다</p> 
                     }

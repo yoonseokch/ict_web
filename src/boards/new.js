@@ -33,16 +33,16 @@ class New extends Component{
     render()
     {        
         return(
-            <div>
-                <div id="categoryselect" className="inline-block relative w-64">
-                    <select id="boardCategory" className="block mb-4 appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="1">로봇 후기 게시판</option>
-                        <option value="2">재판후기 게시판</option>
-                        <option value="3">자유게시판</option>
-                    </select>   
-                </div>
-                <div className="w-full">
+                <div className="w-full pt-12">
                     <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">카테고리</label>
+                        <div id="categoryselect" className="inline-block relative w-64">
+                            <select id="boardCategory" className="block mb-4 appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                <option value="1">로봇 후기 게시판</option>
+                                <option value="2">재판후기 게시판</option>
+                                <option value="3">자유게시판</option>
+                            </select>   
+                        </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" form="title">제목</label>
                         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" placeholder="제목"/>
@@ -56,7 +56,6 @@ class New extends Component{
                     </button>
                     </form>
                 </div>
-            </div>
         );
     }
 }

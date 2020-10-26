@@ -75,7 +75,7 @@ class postdetail extends Component{
         else
         {
         return(
-            <div className="whitespace-normal">
+            <div className="whitespace-normal pt-12">
             <div className="w-full bg-white shadow-md rounded px-8 pt-6 pb-8">
             <div className="bg-white">
             <div className="mb-4">

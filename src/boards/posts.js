@@ -18,14 +18,13 @@ class posts extends Component{
         .then(response => response.json())
         .then((data)=>
         {
-
             this.setState({posts : data});
         })
     }
     render()
     {
         return(
-            <div>
+            <div className="w-full">
                 <ul>
                 {this.state.posts.map((post) => (
                     <Posting key={post.ID} post={post}/>

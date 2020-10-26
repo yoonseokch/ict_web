@@ -16,12 +16,12 @@ class Boards extends Component{
         return(
             <div>
                 <BoardBar/>
-                <div className="background h-auto pb-3">
-                    <div className="boardscenter">
+                <div className="background pb-3 min-h-full h-auto">
+                    <div className="w-240 ml-auto mr-auto">
                     <Router>
                         <Switch>
                         <Route exact path="/boards">
-                        <button onClick={this.write} className="bg-red-700 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-4">
+                        <button onClick={this.write} className="bg-red-700 mt-4 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-4">
                         글쓰기
                         </button>
                         <Posts/>
