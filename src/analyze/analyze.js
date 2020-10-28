@@ -46,7 +46,11 @@ class Analyze extends Component{
         }).then((result) => {
             return result.json();
         }).then((result) => {
-            console.log(result);
+            this.setState({
+                submit : true,
+                keywords: result.keywords[0],
+                ids : result.ids[0]
+            });
         });
     }
     useText = () =>
