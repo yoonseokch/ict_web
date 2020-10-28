@@ -34,7 +34,7 @@ class judgement extends Component{
            ID: this.props.id,
            type:'HTML'
         };
-           fetch('http://www.law.go.kr/DRF/lawService.do?'+new URLSearchParams(main))
+           fetch('https://www.law.go.kr/DRF/lawService.do?'+new URLSearchParams(main))
             .then((response)=>
             {    
                 window.open(response.url);
