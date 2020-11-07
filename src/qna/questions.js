@@ -8,7 +8,6 @@ class findQna extends Component{
     }
     componentDidMount(){
         let b= this.context;
-        console.log(`${b.API_URL}/qna/question`);
         fetch(`${b.API_URL}/qna/question`,{
             method: "GET",
             headers: {
@@ -18,7 +17,6 @@ class findQna extends Component{
         .then(response => response.json())
         .then((data)=>
         {
-            console.log(data);
             this.setState({questions : data.posts,tags:data.tags});
         })
     }

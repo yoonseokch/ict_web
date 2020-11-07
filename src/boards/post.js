@@ -13,7 +13,7 @@ class post extends Component{
         if ((window.location.search.split('?category=')[1]==="0") || (parseInt(window.location.search.split('?category=')[1])===this.props.post.boardCategory) || (window.location.search===""))
         {
             return(
-                <div onClick={this.locate}className="border-2 h-20 bg-white rounded-none overflow-hidden">
+                <div onClick={this.locate} className="border-2 h-20 bg-white rounded-none overflow-hidden">
                     <div className="ml-5 mt-3 font-bold">
                     {this.props.post.title}
                     </div>

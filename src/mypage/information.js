@@ -39,6 +39,7 @@ class Information extends Component {
         return ( 
             <div className="my-8 w-full text-2xl pl-10">
                 <div>
+                <img className="mr-8 w-16 h-16 inline-block" src={this.state.user.photo} alt="1"/>
                 {this.state.user.name}
                 </div>
                 <div>

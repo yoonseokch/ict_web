@@ -6,7 +6,65 @@ class register extends Component
 {
     state= {
         canMake : false,
+        phoneCheck : false,
         isLawyer : false,
+    }
+    checkMessage=()=>{
+        let b=this.context;
+        var data={
+            phone : document.getElementById("phone").value,
+            validateNum : parseInt(document.getElementById("message").value),
+        }
+        console.log(data);
+        fetch(`${b.API_URL}/register/phone-check`,{
+            method : 'POST',
+            headers : {
+                token : sessionStorage.getItem('token'),
+                'Content-Type': 'application/json',
+            },
+            body :JSON.stringify(data)
+        }).then((data)=>{
+            return data.json();
+        }).then((data)=>{
+            if (data.success===true)
+            {
+                alert("인증되었습니다.");
+                this.setState({
+                    phoneCheck : true
+                });
+                document.getElementById("phone").disabled=true;
+            }
+            else
+            {
+                alert("틀린 인증번호입니다");
+            }
+        })
+    }
+    sendMessage=()=>{
+        let b=this.context;
+        var data={
+            phone : document.getElementById("phone").value
+        }
+        fetch(`${b.API_URL}/register/phone-validate`,{
+            method : 'POST',
+            headers : {
+                token : sessionStorage.getItem('token'),
+                'Content-Type': 'application/json',
+            },
+            body :JSON.stringify(data)
+        }).then((data)=>{
+            return data.json();
+        }).then((data)=>{
+            if (data.success===true)
+            {
+                alert("문자 메시지가 발송되었습니다");
+            }
+            else
+            {
+                alert("이미 회원가입된 번호입니다");
+            }
+        })
+        
     }
     qualification = (e) =>{
         if (e.target.id==="case1")
@@ -34,18 +92,15 @@ class register extends Component
     redundancyCheck = () =>
     {
         let b= this.context;
-        var data={
+        var a={
             userID : document.getElementById("ID").value
         };
-        if (data.userID.length<5)
+        let regEx = /^[A-Za-z0-9_-]*$/gm;
+        let idInRange = (a.userID.length >= 2) && (a.userID.length <= 20);
+        if (!(regEx&&idInRange))
         {
-            window.alert('아이디는 5자 이상이어야 합니다');
-            return;
-        }
-        if (data.userID.length>20)
-        {
-            window.alert('아이디는 20자 이하이어야 합니다');
-            return;
+            alert("아이디는 2자 이상 20자 이하의 알파벳과 숫자로 이루어져야 합니다");
+            return 0;
         }
         fetch(`${b.API_URL}/register/check`,{
             method : 'POST',
@@ -53,7 +108,7 @@ class register extends Component
                 token : sessionStorage.getItem('token'),
                 'Content-Type': 'application/json',
             },
-            body :JSON.stringify(data)
+            body :JSON.stringify(a)
         }).then(response => response.json())
         .then((data)=>
         {
@@ -84,6 +139,11 @@ class register extends Component
         a.phone=document.getElementById("phone").value;
         a.Lawyer=this.state.isLawyer;
         let b=this.context;
+        if (!this.state.phoneCheck)
+        {
+            alert("핸드폰 인증을 해주세요");
+            return 0;
+        }
         if (this.state.canMake)
         {
             fetch(`${b.API_URL}/register`, {
@@ -155,7 +215,14 @@ class register extends Component
                         전화번호
                         </label>
                         <input className="shadow w-3/4 mr-6 appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="phone" placeholder="010-XXXX-XXXX"/>
-                        <button onClick={this.redundancyCheck} className="w-1/5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-0">인증</button>
+                        <button onClick={this.sendMessage} className="w-1/5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-0">인증</button>
+                    </div>
+                    <div className="mb-2 py-1">
+                        <label className="pl-1 block text-gray-700 text-sm font-bold mb-2">
+                        인증번호
+                        </label>
+                        <input className="shadow w-3/4 mr-6 appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" type="int" placeholder="****"/>
+                        <button onClick={this.checkMessage} className="w-1/5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-0">입력</button>
                     </div>
                     <div className="mb-2">
                         <label className="pl-1 block text-gray-700 text-sm font-bold mb-2">

@@ -8,7 +8,6 @@ class posts extends Component{
     }
     componentDidMount(){
         let b= this.context;
-
         fetch(`${b.API_URL}/boards/posts`,{
             method: "GET",
             headers: {
@@ -19,6 +18,7 @@ class posts extends Component{
         .then((data)=>
         {
             this.setState({posts : data});
+            console.log(data);
         })
     }
     render()
@@ -30,7 +30,6 @@ class posts extends Component{
                     <Posting key={post.ID} post={post}/>
                 ))}
                 </ul>
-
             </div>
         );
     }

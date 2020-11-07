@@ -10,6 +10,7 @@ import Mypage from './mypage/mypage.js';
 import Main from './main/main.js';
 import Qna from './qna/qna.js';
 import Interpret from './interpret/interpret.js';
+import Test from './test/test.js';
 import { MyContext, LOCAL_URL, PRODUCTION_URL } from './context.js';
 class App extends Component
 {
@@ -52,6 +53,7 @@ class App extends Component
             <Route path="/mypage" component={Mypage}/>
             <Route path="/qna" component={Qna} />
             <Route path="/interpret" component={Interpret} />
+            <Route path="/test" component={Test}/>
             <Redirect path="*" to="/" />
             </Switch>
           </Router>

@@ -9,7 +9,6 @@ class Question extends Component{
         tags:[]
     }
     componentDidMount(){
-        console.log(this.props.question.tags);
         var b=this.context;
         fetch(`${b.API_URL}/qna/category`, {
             method: "GET",
