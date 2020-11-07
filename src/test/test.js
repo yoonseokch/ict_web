@@ -21,7 +21,7 @@ class Analyze extends Component{
         data.append('temp', img);
         console.log(data);
         let b=this.context;
-        fetch(`http://localhost:8080/user/profile`, {
+        fetch(`${b.API.URL}/user/profile`, {
         method: "PUT",
         body: data,
         headers: {
